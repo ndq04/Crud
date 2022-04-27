@@ -1,0 +1,45 @@
+<section class="todoapp">
+  <header class="header">
+    <h1>CLI</h1>
+    <form #form="ngForm" (ngSubmit)="onSubmit(form)">
+      <input
+        class="new-todo"
+        placeholder="Name?"
+        autofocus
+        name="title"
+        [(ngModel)]="todo.title"
+      />
+    </form>
+  </header>
+  <section class="main">
+    <ul class="todo-list" *ngFor="let todo of todos">
+      <li [class.completed]="todo.isDone">
+        <div class="view">
+          <input
+            class="toggle"
+            type="checkbox"
+            [checked]="todo.isDone"
+            (change)="toggleDone(todo)"
+          />
+          <label>{{ todo.title }}</label>
+          <button class="destroy" (click)="deleteTodo(todo)"></button>
+        </div>
+        <input class="edit" value="Create a TodoMVC template" />
+      </li>
+    </ul>
+  </section>
+  <footer class="footer">
+    <span class="todo-count"
+      ><strong>{{ (todos && todos.length) || 0 }}</strong> item left</span
+    >
+    <ul class="filters">
+      <li (click)="getAllTodos()">
+        <a class="selected" href="#/">All</a>
+      </li>
+      <li (click)="getDoneTodos()">
+        <a href="#/completed">Completed</a>
+      </li>
+    </ul>
+    <button class="clear-completed">Clear completed</button>
+  </footer>
+</section>
